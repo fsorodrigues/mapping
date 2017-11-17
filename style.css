@@ -1,0 +1,27 @@
+.svgBox {
+    width:98vw;
+    height: 98vh;
+}
+
+.background {
+  fill: none;
+  pointer-events: all;
+}
+
+.feature {
+  /*fill: #ccc;*/
+  cursor: pointer;
+}
+
+.feature.active {
+  fill: gainsboro;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #EEEEEE;
+  border-radius: 10%;
+  padding: 1%;
+  font-family: Verdana;
+  font-size: .8rem;
+}
