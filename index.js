@@ -45,44 +45,32 @@ var formatComma = d3.format(",")
 
 queue()
   .defer(d3.json, "./cb_2016_us_state_20m.json") // import the map geoJSON
-  .defer(d3.json, "./cities_us_1000.json")          // import the data from the .csv file
+  .defer(d3.csv, "./beach_nour.csv")          // import the data from the .csv file
   .await( function(err, dataIn, circleData) {
 
     circleData.forEach(function(d) {
-      d.population = +d.population;
-      d.latitute = +d.latitude;
-      d.longitude = +d.longitude;
-      d.growth_from_2000_to_2013 = parseFloat(d.growth_from_2000_to_2013.replace("%", ""));
+      d.latitude = +d.lat;
+      d.longitude = +d.long;
+      // d.cost_2013 = parseInt(d.cost_2013.replace("$", ""));
+      // d.growth_from_2000_to_2013 = parseFloat(d.growth_from_2000_to_2013.replace("%", ""));
 
     })
 
     console.log(circleData);
 
-    // var nested = d3.nest()
-    //                 .key( function(d) { return d.fund_source })
-    //                 .entries(circleData);
-
     var nested = d3.nest()
-                    .key( function(d) { return d.growth_from_2000_to_2013 })
+                    .key( function(d) { return d.fund_source })
                     .entries(circleData);
 
     console.log(nested);
 
-    // console.log(nested);
-    //
-    // var fundMap = nested.map( function(d) { return d.key })
-    //
-    // console.log(fundMap);
+    var fundMap = nested.map( function(d) { return d.key })
 
-    var rateMap = nested.map(function(d) { return +d.key })
-                        .sort(function(a, b) { return b - a; })
+    console.log(fundMap);
 
-    console.log(rateMap);
+    var cats = fundMap.lenght;
 
-
-    // var colorScale = d3.scaleOrdinal(d3.schemeSet1).domain(fundMap);
-
-    var colorScale = d3.scaleThreshold().domain([0,3]).range(d3.schemeRdYlGn[4]);
+    var colorScale = d3.scaleOrdinal(d3.schemeRdYlGn[6]).domain(fundMap);
 
   // popData.forEach(function(d) {
   //   stateLookup.set(d.name, d.population);
@@ -105,25 +93,24 @@ queue()
         .attr('stroke','#777777')
         .attr('stroke-width',.4);
 
-
     svg.selectAll('.circle')
         .data(circleData)
         .enter()
         .append("circle")
         .attr("class", "circle")
-        .attr("id", function(d) { return d.city })
+        .attr("id", function(d) { return d.location })
         .attr("cx", function(d) { return albersProjection([d.longitude, d.latitude])[0] })
         .attr("cy", function(d) { return albersProjection([d.longitude, d.latitude])[1] })
         .attr('r', 5)
-        // .attr("fill", "red")
-        .attr("fill", function(d) { return colorScale(d.growth_from_2000_to_2013) })
-        .attr("fill-opacity", .6)
+        .attr("fill", "red")
+        .attr("fill", function(d) { return colorScale(d.fund_source) })
+        .attr("fill-opacity", .2)
         .on("mouseover", function(d) {
             tooltip.transition()
                    .duration(200)
                    .style("opacity", .8);
 
-            tooltip.html("<b>" + d.city + "</b> <br>" + formatComma(d.population) + "<br>" + d.growth_from_2000_to_2013)
+            tooltip.html("<b>" + d.location + "</b> <br>" + d.cost_2013)
                    .style("left", (d3.event.pageX + 10) + "px")
                    .style("top", (d3.event.pageY - 40) + "px");
         })
@@ -140,11 +127,16 @@ queue()
   });
 
 function zoomed() {
-  svg.attr("stroke-width", 1.5 / d3.event.transform.k + "px");
   svg.attr("transform", d3.event.transform);
 
-  d3.selectAll(".circle").transition().duration(300).attr("r", 5 / d3.event.transform.k + "px")
-                         // .attr("fill-opacity", 0.05 * d3.event.transform.k);
+  d3.selectAll(".feature").transition()
+                          .duration(250)
+                          .attr("stroke-width", .4 / d3.event.transform.k);
+
+  d3.selectAll(".circle").transition()
+                         .duration(250)
+                         .attr("r", 5 / d3.event.transform.k)
+                         .attr("fill-opacity", 0.2 * d3.event.transform.k);
 };
 
 function stopped() {
