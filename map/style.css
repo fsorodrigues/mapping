@@ -1,11 +1,22 @@
+body {
+    margin: 0;
+}
+
+svg {
+    margin: 0;
+}
+
 .svgBox {
-    width:98vw;
-    height: 98vh;
+    width: 98vw;
+    height: 97vh;
+    /*margin: 1%;*/
 }
 
 .background {
   fill: none;
   pointer-events: all;
+  width:98vw;
+  height: 96vh;
 }
 
 .feature {
@@ -14,14 +25,33 @@
 }
 
 .feature.active {
-  fill: gainsboro;
+  /*green: #83BE44; yellow: #fbc528*/
+  fill: #9bcb69;
 }
 
 .tooltip {
   position: absolute;
   background-color: #EEEEEE;
-  border-radius: 10%;
-  padding: 1%;
-  font-family: Verdana;
+  border: 1pt solid #4A4A4A;
+  border-radius: 2%;
+  padding: .5%;
+  font-family: "Roboto", Verdana, sans-serif;
+  font-weight: 300;
   font-size: .8rem;
+}
+
+.legend-label {
+  font-family: "Roboto", Verdana, sans-serif;
+  font-weight: 300;
+  font-size: .8rem;
+}
+
+.legend-title {
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+  font-size: .8rem;
+}
+
+.label {
+  font-family: "Roboto", Verdana, sans-serif;
 }

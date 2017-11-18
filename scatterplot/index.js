@@ -1,6 +1,6 @@
 var width = 700;
 var height = 700;
-var radius = 3;
+var radius = 4;
 
 var margin = { "top": 50,
                "bottom": 50,
@@ -18,6 +18,8 @@ var tooltip = d3.select("body")
                  .append("div")
                  .attr("class", "tooltip")
                  .style("opacity", 0);
+
+var formatDecimalComma = d3.format(",.2f")
 
 d3.csv("beach_nour_clean.csv", function (dataIn) {
 
@@ -76,13 +78,13 @@ function drawPlot(dataset) {
                  .attr("r", radius)
                  .attr("fill", "red")
                 //  .attr("fill", function(d) { return makeColor(d.hrsNum, (d.gamesAgainst/2)) })
-                 .attr("opacity", .1);
+                 .attr("opacity", .2);
 
       scatterPlot.enter()
                   .append("circle")
                   .attr("cx", function(d) { return scaleX(d.cost_2013) })
                   .attr("cy", function(d) { return scaleY(d.volume) })
-                  .attr("r", 0)
+                  .attr("r", radius)
                   .on("mouseover", mouseOver)
                   .on("mouseout", mouseOut)
                     .transition()
@@ -139,9 +141,9 @@ function mouseOver(d) {
 
         tooltip.html("<b>" + d.location + "</b>"
                            + "<br>" + d.state + " in " + d.year
-                           + "<br>$: " + d.cost_2013
-                           + "<br>CY" + d.volume
-                           + "<br>$/CY: " + (d.cost_2013 / d.volume) )
+                           + "<br>$: " + formatDecimalComma(d.cost_2013)
+                           + "<br>CY: " + formatDecimalComma(d.volume)
+                           + "<br>$/CY: " + formatDecimalComma((d.cost_2013 / d.volume)) )
                 .style("left", (d3.event.pageX + 10) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
               };

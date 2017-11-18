@@ -3,25 +3,15 @@
     height: 98vh;
 }
 
-.background {
-  fill: none;
-  pointer-events: all;
-}
-
-.feature {
-  /*fill: #ccc;*/
-  cursor: pointer;
-}
-
-.feature.active {
-  fill: gainsboro;
-}
-
 .tooltip {
   position: absolute;
   background-color: #EEEEEE;
-  border-radius: 10%;
-  padding: 1%;
-  font-family: Verdana;
+  border: 1pt solid #4A4A4A;
+  padding: .5%;
+  font-family: "Roboto", Verdana, sans-serif;
   font-size: .8rem;
+}
+
+text {
+  font-family: "Roboto", Verdana, sans-serif;
 }

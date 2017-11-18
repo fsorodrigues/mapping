@@ -1,0 +1,173 @@
+[
+    {
+        "city": "New York",
+        "growth_from_2000_to_2013": "4.8%",
+        "latitude": 40.7127837,
+        "longitude": -74.0059413,
+        "population": "8405837",
+        "rank": "1",
+        "state": "New York"
+    },
+    {
+        "city": "Los Angeles",
+        "growth_from_2000_to_2013": "4.8%",
+        "latitude": 34.0522342,
+        "longitude": -118.2436849,
+        "population": "3884307",
+        "rank": "2",
+        "state": "California"
+    },
+    {
+        "city": "Houston",
+        "growth_from_2000_to_2013": "11.0%",
+        "latitude": 29.7604267,
+        "longitude": -95.3698028,
+        "population": "2195914",
+        "rank": "4",
+        "state": "Texas"
+    },
+    {
+        "city": "San Diego",
+        "growth_from_2000_to_2013": "10.5%",
+        "latitude": 32.715738,
+        "longitude": -117.1610838,
+        "population": "1355896",
+        "rank": "8",
+        "state": "California"
+    },
+    {
+        "city": "Jacksonville",
+        "growth_from_2000_to_2013": "14.3%",
+        "latitude": 30.3321838,
+        "longitude": -81.65565099999999,
+        "population": "842583",
+        "rank": "13",
+        "state": "Florida"
+    },
+    {
+        "city": "San Francisco",
+        "growth_from_2000_to_2013": "7.7%",
+        "latitude": 37.7749295,
+        "longitude": -122.4194155,
+        "population": "837442",
+        "rank": "14",
+        "state": "California"
+    },
+    {
+        "city": "Seattle",
+        "growth_from_2000_to_2013": "15.6%",
+        "latitude": 47.6062095,
+        "longitude": -122.3320708,
+        "population": "652405",
+        "rank": "21",
+        "state": "Washington"
+    },
+    {
+        "city": "Boston",
+        "growth_from_2000_to_2013": "9.4%",
+        "latitude": 42.3600825,
+        "longitude": -71.0588801,
+        "population": "645966",
+        "rank": "24",
+        "state": "Massachusetts"
+    },
+    {
+        "city": "Virginia Beach",
+        "growth_from_2000_to_2013": "5.1%",
+        "latitude": 36.8529263,
+        "longitude": -75.97798499999999,
+        "population": "448479",
+        "rank": "39",
+        "state": "Virginia"
+    },
+    {
+        "city": "Miami",
+        "growth_from_2000_to_2013": "14.9%",
+        "latitude": 25.7616798,
+        "longitude": -80.1917902,
+        "population": "417650",
+        "rank": "44",
+        "state": "Florida"
+    },
+    {
+        "city": "Tampa",
+        "growth_from_2000_to_2013": "16.0%",
+        "latitude": 27.950575,
+        "longitude": -82.4571776,
+        "population": "352957",
+        "rank": "53",
+        "state": "Florida"
+    },
+    {
+        "city": "Corpus Christi",
+        "growth_from_2000_to_2013": "14.1%",
+        "latitude": 27.8005828,
+        "longitude": -97.39638099999999,
+        "population": "316381",
+        "rank": "60",
+        "state": "Texas"
+    },
+    {
+        "city": "Mobile",
+        "growth_from_2000_to_2013": "-1.9%",
+        "latitude": 30.6953657,
+        "longitude": -88.0398912,
+        "population": "194899",
+        "rank": "122",
+        "state": "Alabama"
+    },
+    {
+        "city": "Brownsville",
+        "growth_from_2000_to_2013": "26.8%",
+        "latitude": 25.9017472,
+        "longitude": -97.4974838,
+        "population": "181860",
+        "rank": "131",
+        "state": "Texas"
+    },
+    {
+        "city": "Oceanside",
+        "growth_from_2000_to_2013": "6.6%",
+        "latitude": 33.1958696,
+        "longitude": -117.3794834,
+        "population": "172794",
+        "rank": "137",
+        "state": "California"
+    },
+    {
+        "city": "Port St. Lucie",
+        "growth_from_2000_to_2013": "91.7%",
+        "latitude": 27.2730492,
+        "longitude": -80.3582261,
+        "population": "171016",
+        "rank": "142",
+        "state": "Florida"
+    },
+    {
+        "city": "Cape Coral",
+        "growth_from_2000_to_2013": "60.4%",
+        "latitude": 26.5628537,
+        "longitude": -81.9495331,
+        "population": "165831",
+        "rank": "146",
+        "state": "Florida"
+    },
+    {
+        "city": "Bridgeport",
+        "growth_from_2000_to_2013": "5.4%",
+        "latitude": 41.1865478,
+        "longitude": -73.19517669999999,
+        "population": "147216",
+        "rank": "172",
+        "state": "Connecticut"
+    },
+    {
+        "city": "Charleston",
+        "growth_from_2000_to_2013": "29.2%",
+        "latitude": 32.7764749,
+        "longitude": -79.93105120000001,
+        "population": "127999",
+        "rank": "200",
+        "state": "South Carolina"
+    }
+]
