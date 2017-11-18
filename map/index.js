@@ -44,7 +44,7 @@ canvas.call(zoom);
 var formatComma = d3.format(",")
 
 function parseDollars(value) {
-  if (value == "$0") {
+  if (value == "$0" || value == "") {
     return "Cost data not available";
   } else {
     return value;
