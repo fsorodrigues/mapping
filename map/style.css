@@ -26,19 +26,27 @@ svg {
 
 .feature.active {
   /*green: #83BE44; yellow: #fbc528*/
-  fill: #9bcb69;
+  fill: #8B63C7;
 }
 
 .tooltip {
   position: absolute;
+
+}
+
+.tooltip-info {
   background-color: #EEEEEE;
   border: 1pt solid #4A4A4A;
   border-radius: 2%;
-  padding: .5%;
+  margin: .5%;
+  padding: 2%;
   font-family: "Roboto", Verdana, sans-serif;
   font-weight: 300;
-  font-size: .8rem;
+  font-size: .6rem;
+  width: 220px;
+  opacity: .95
 }
+
 
 .legend-label {
   font-family: "Roboto", Verdana, sans-serif;
@@ -54,4 +62,16 @@ svg {
 
 .label {
   font-family: "Roboto", Verdana, sans-serif;
+}
+
+p.location {
+  font-weight: bold;
+  margin: 0;
+  line-height: 1rem;
+}
+
+p.info {
+  font-weight: normal;
+  margin: 0;
+  line-height: 1rem;
 }
