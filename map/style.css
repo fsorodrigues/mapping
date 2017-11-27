@@ -23,7 +23,6 @@
 }
 
 #svgBox .feature.active {
-  /*green: #83BE44; yellow: #fbc528*/
   fill: #a6a6a6;
 }
 
@@ -106,7 +105,7 @@
 
 #svgBox .buttons {
   font-family: "Montserrat",sans-serif;
-  background-color: #b4d88e;
+  background-color: #B4D88E;
   border: none;
   color: #273914;
   padding: 1% 1%;
@@ -116,7 +115,7 @@
   font-size: 1rem;
   margin-right: 1%;
   width: 135px;
-  box-shadow: inset 0 2px 0 0 #b8e986;
+  box-shadow: inset 0 2px 0 0 #B8E986;
 }
 
 #svgBox .clicked {
@@ -130,11 +129,11 @@
   font-size: 1rem;
   margin-right: 1%;
   width: 135px;
-  box-shadow: inset 0 2px 0 0 #b8e986;
+  box-shadow: inset 0 2px 0 0 #B8E986;
 }
 
 #svgBox tbody tr:nth-child(even) {
-  background-color: #c8c8c8;
+  background-color: #C8C8C8;
 }
 
 #svgBox table {
@@ -157,4 +156,8 @@
 #svgBox th,
 #svgBox td {
   padding-left: .5em;
+}
+
+#svgBox th {
+  border-bottom: 1pt solid #4A4A4A;
 }
