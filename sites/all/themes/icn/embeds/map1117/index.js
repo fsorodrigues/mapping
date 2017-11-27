@@ -47,7 +47,9 @@ var canvas = d3.select("#svgBox")
                .append("svg")
                .attr("id", "svg1")
                .attr("width", width)
-               .attr("height", height)
+               .attr("height", function(d) { if (width  > 400) { return height }
+                                             else { return 300 }
+                                            })
                .on("click", stopped, true);
 
 // appending background rect for resetting zoom
@@ -65,8 +67,12 @@ var svg = canvas.append("g")
 var svgFixed = d3.select("#svgBox")
                   .append("svg")
                   .attr("id", "svg2")
-                  .style("left", width - 180)
-                  .style("top", height - 99)
+                  .style("left", function(d) { if (width > 400) { return 50 + "px" }
+                                                   else { return 0 + "px" }
+                                                 })
+                  .style("top", function(d) { if (width > 400) { return - 170 + "px" }
+                                                   else { return 0 + "px" }
+                                                  })
                   .append("g");
 
 // appending divs for tooltip
@@ -81,9 +87,15 @@ var stateTooltip = d3.select("#svgBox")
                       .style("opacity", 0);
 
 //set up the projection for the map
-var albersProjection = d3.geoAlbersUsa()  //tell it which projection to use
-                          .scale(1050)    //tell it how big the map should be
-    .translate([(width/2), (height/2)]);  //set the center of the map to show up in the center of the screen
+var albersProjection = d3.geoAlbersUsa()            //tell it which projection to use
+                          .scale((width + 100))     //tell it how big the map should be
+                          .translate(translateMap(width, height)) //set the center of the map to show up in the center of the screen
+
+function translateMap(width, height) {
+  if (width > 400) {
+    return [(width/2), (height/2)];
+  } else { return [(width/2), (height/3)] }
+};
 
 var zoom = d3.zoom()
              .scaleExtent([1, 30])
@@ -157,6 +169,7 @@ queue()
 
     // creating array listing states on By state data
     var stateList = stateData.map( function(d) { return d.state; });
+    var stateSTUSPS = stateData.map( function(d) { return d.STUSPS; });
 
     // creating array listing cost on By state data
     var stateCost = stateData.map( function(d) { return d.total_cost; });
@@ -222,13 +235,13 @@ queue()
         .append("path")                  //add the paths to the DOM
         .attr("d", path)                 //actually draw them
         .attr("class", "feature")
-        .attr("id", function(d) { return d.properties.NAME })
+        .attr("id", function(d) { return d.properties.STUSPS })
         .attr('fill','#EEEEEE')
         .attr('stroke','#4A4A4A')
         .attr('stroke-width',.4);
 
-    for (var i = 0; i < stateList.length; i++) {
-      d3.select("#" + stateList[i])
+    for (var i = 0; i < stateSTUSPS.length; i++) {
+      d3.select("#" + stateSTUSPS[i])
         .on("mouseover", function(d) { d3.select(this)
                                          .attr("fill", "#C0C0C0") })
         .on("mouseout", function(d) { d3.select(this)
@@ -323,7 +336,7 @@ queue()
  // By project data
  var legendProjects = svgFixed.append("g")
                               .attr("class", "legend")
-                              .attr("transform", "translate(" + 35 + "," + 50 + ")")
+                              .attr("transform", "translate(" + 30 + "," + 60 + ")")
 
  var legendTitle_1 = legendProjects.append("g")
                                  .attr("transform", "translate(-8,-32)")
@@ -369,10 +382,10 @@ queue()
                                   .attr("y", function(d,i) { return 5 + (i * 20) })
                                   .text(function(d) { return scaleLookup.get(d); });
 
-  // By project data
+  // By state data
   var legendState = svgFixed.append("g")
                               .attr("class", "legend-country")
-                              .attr("transform", "translate(" + 20 + "," + 40 + ")");
+                              .attr("transform", "translate(" + 20 + "," + 60 + ")");
 
   var legendStateTitle_1 = legendState.append("g")
                                         .attr("transform", "translate(0,-16)")
@@ -385,8 +398,6 @@ queue()
                                         .append("text")
                                         .attr("class", "legend-title")
                                         .text("projects since 1990");
-
-
 
   var legendCircleTitle = legendState.append("g")
                                         .attr("transform", "translate(25,55)")
@@ -628,8 +639,13 @@ function mouseoverProjects(d,i) {
              .duration(300)
              .style("opacity", .9)
 
-      tooltip.style("left", (d3.event.pageX + 10) + "px" )
-             .style("top", (d3.event.pageY - 30) + "px" );
+      tooltip.style("left", function() { if (d3.event.pageX > (width / 2)) {
+                                            return d3.event.pageX - 240 + "px"
+                                       } else {
+                                            return d3.event.pageX + 10 + "px"
+                                       }
+                                     })
+             .style("top", d3.event.pageY - 28 + "px")
 
       var tooltipInfo = tooltip.append("div")
                                .attr("class", "tooltip-content");
@@ -680,8 +696,13 @@ function mouseoutProjects(d,i) {
 function mouseoverStates(d,i) {
 
             stateTooltip.style("opacity", 1)
-                        .style("left", (d3.event.pageX + 10) +  "px")
-                        .style("top", (d3.event.pageY - 10) +  "px");
+                        .style("left", function() { if (d3.event.pageX > (width / 2)) {
+                                                        return d3.event.pageX - 110 + "px"
+                                                   } else {
+                                                        return d3.event.pageX + 10 + "px"
+                                                   }
+                                                 })
+                         .style("top", d3.event.pageY - 28 + "px");
 
             stateTooltip.html("<p class='location'>" + d.state + "</p>" +
                               "<p class='info'>" + formatMoney(costLookup.get(d.state)) + "</p>")
@@ -691,8 +712,8 @@ function mouseoverStates(d,i) {
 function mouseoutStates(d,i) {
 
                       stateTooltip.style("opacity", 0)
-                                  .style("left", (d3.event.pageX + 10) +  "px")
-                                  .style("top", (d3.event.pageY - 10) +  "px");
+                                  .style("left", 0)
+                                  .style("top", 0);
 
                       stateTooltip.html("");
 }

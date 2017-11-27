@@ -1,6 +1,6 @@
 #map-container {
   width: 924px;
-  height: 550px
+  height: 500px;
 }
 
 #svgBox #svg1 {
@@ -8,9 +8,10 @@
 }
 
 #svgBox #svg2 {
-  position: absolute;
-  width: 180px;
-  height: 150px;
+  background: rgba(255,255,255,.7);
+  position: relative;
+  width: 200px;
+  height: 180px;
 }
 
 #svgBox .background {
@@ -32,6 +33,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-content: center;
+  max-width: 240px
 }
 
 #svgBox .state-tooltip {

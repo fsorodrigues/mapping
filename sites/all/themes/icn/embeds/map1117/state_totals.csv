@@ -1,20 +1,20 @@
-state,total_cost
-New Jersey,1546865139.24
-California,17037222.00
-South Carolina,374368033.96
-Maryland,199129062.63
-North Carolina,640402755.49
-Louisiana,1102202825.18
-Florida,1538408899.11
-Delaware,169594559.15
-Texas,54685260.60
-Washington,15486054.07
-Rhode Island,1045873.00
-New York,520924991.81
-Maine,3577791.72
-Mississippi,37476644.18
-Virginia,198950067.77
-Alabama,73361825.01
-Massachusetts,18354342.16
-Connecticut,5444823.78
-Georgia,52072023.99
+state,STUSPS,total_cost
+New Jersey,NJ,1546865139.24
+California,CA,17037222.00
+South Carolina,SC,374368033.96
+Maryland,MD,199129062.63
+North Carolina,NC,640402755.49
+Louisiana,LA,1102202825.18
+Florida,FL,1538408899.11
+Delaware,DE,169594559.15
+Texas,TX,54685260.60
+Washington,WA,15486054.07
+Rhode Island,RI,1045873.00
+New York,NY,520924991.81
+Maine,ME,3577791.72
+Mississippi,MS,37476644.18
+Virginia,VA,198950067.77
+Alabama,AL,73361825.01
+Massachusetts,MA,18354342.16
+Connecticut,CT,5444823.78
+Georgia,GA,52072023.99
