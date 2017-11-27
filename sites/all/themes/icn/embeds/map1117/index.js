@@ -1,6 +1,9 @@
 // grabbing width and height of parent container
-var height = document.getElementById("map-container").clientHeight;
 var width = document.getElementById("map-container").clientWidth;
+var height = width * 0.595238095;
+
+console.log(width);
+console.log(height);
 
 var active = d3.select(null);
 
@@ -89,25 +92,18 @@ var stateTooltip = d3.select("#svgBox")
 //set up the projection for the map
 var albersProjection = d3.geoAlbersUsa()            //tell it which projection to use
                           .scale((width + 100))     //tell it how big the map should be
-                          .translate(translateMap(width, height)) //set the center of the map to show up in the center of the screen
+                          .translate([width/2, height/2]) //set the center of the map to show up in the center of the screen
 
-function translateMap(width, height) {
-  if (width > 400) {
-    return [(width/2), (height/2)];
-  } else { return [(width/2), (height/3)] }
-};
 
 var zoom = d3.zoom()
              .scaleExtent([1, 30])
              .on("zoom", zoomed);
 
 //set up the path generator function to draw the map outlines
-path = d3.geoPath()
-    .projection(albersProjection);        //tell it to use the projection that we just made to convert lat/long to pixels
+var path = d3.geoPath()
+            .projection(albersProjection);        //tell it to use the projection that we just made to convert lat/long to pixels
 
 canvas.call(zoom);
-
-var formatComma = d3.format(",")
 
 // creating array to force order in legend
 var priority_order = ["Federal", "State", "Local", "Private", "Unknown"]
@@ -116,28 +112,6 @@ var priority_order = ["Federal", "State", "Local", "Private", "Unknown"]
 var locationLookup = d3.map(); // location will return [long, lat]
 var costLookup = d3.map(); // state will return cost
 var stateLookup = d3.map(); // location will return state
-
-// number formatting functions
-var formatNoDecimalComma = d3.format(",.0f")
-var formatMoney = function(d) { return "$ " + formatNoDecimalComma(d); };
-
-// parser functions to change zeros and nulls for Data N/A
-function parseLength(value) {
-  if (value == "$0" || value == "0.00" || value == "0" || value == "") {
-    return "Data N/A";
-  } else {
-    return value;
-  }
-};
-
-// parser function to change zeros and nulls for Data N/A
-function parseCost(value) {
-  if (value == "$0" || value == "0.00" || value == "0" || value == "") {
-    return "Data N/A";
-  } else {
-    return "$ " + value;
-  }
-};
 
 // setting up file loading queue
 queue()
@@ -749,4 +723,27 @@ function drawTable(data) {
                   .enter()
                   .append("td")
                   .html(function (d) { return d.value; });
+};
+
+// number formatting functions
+var formatComma = d3.format(",")
+var formatNoDecimalComma = d3.format(",.0f")
+var formatMoney = function(d) { return "$ " + formatNoDecimalComma(d); };
+
+// parser functions to change zeros and nulls for Data N/A
+function parseLength(value) {
+  if (value == "$0" || value == "0.00" || value == "0" || value == "") {
+    return "Data N/A";
+  } else {
+    return value;
+  }
+};
+
+// parser function to change zeros and nulls for Data N/A
+function parseCost(value) {
+  if (value == "$0" || value == "0.00" || value == "0" || value == "") {
+    return "Data N/A";
+  } else {
+    return "$ " + value;
+  }
 };
