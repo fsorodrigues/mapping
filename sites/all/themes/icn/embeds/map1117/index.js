@@ -230,7 +230,7 @@ queue()
     for (var i = 0; i < stateList.length; i++) {
       d3.select("#" + stateList[i])
         .on("mouseover", function(d) { d3.select(this)
-                                         .attr("fill", "#A6A6A6") })
+                                         .attr("fill", "#C0C0C0") })
         .on("mouseout", function(d) { d3.select(this)
                                         .attr('fill','#EEEEEE') })
         .on("click", clicked);
@@ -283,7 +283,7 @@ queue()
         .attr("stroke", "#83BE44")
         .attr("stroke-width", 1.5)
         .attr("fill", "#83BE44")
-        .attr("fill-opacity", .3)
+        .attr("fill-opacity", .6)
         .on("mouseover", mouseoverStates)
         .on("mouseout", mouseoutStates);
 
