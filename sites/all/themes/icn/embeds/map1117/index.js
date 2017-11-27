@@ -222,10 +222,19 @@ queue()
         .append("path")                  //add the paths to the DOM
         .attr("d", path)                 //actually draw them
         .attr("class", "feature")
-        .on("click", clicked)
+        .attr("id", function(d) { return d.properties.NAME })
         .attr('fill','#EEEEEE')
         .attr('stroke','#4A4A4A')
         .attr('stroke-width',.4);
+
+    for (var i = 0; i < stateList.length; i++) {
+      d3.select("#" + stateList[i])
+        .on("mouseover", function(d) { d3.select(this)
+                                         .attr("fill", "#A6A6A6") })
+        .on("mouseout", function(d) { d3.select(this)
+                                        .attr('fill','#EEEEEE') })
+        .on("click", clicked);
+    };
 
     // appending rects for geocoded cities
     svg.append("g")
