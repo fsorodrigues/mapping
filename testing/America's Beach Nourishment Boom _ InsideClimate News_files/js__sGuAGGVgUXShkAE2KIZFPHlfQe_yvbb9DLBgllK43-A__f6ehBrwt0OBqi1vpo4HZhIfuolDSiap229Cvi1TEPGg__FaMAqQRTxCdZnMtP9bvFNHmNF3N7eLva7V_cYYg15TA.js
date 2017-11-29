@@ -704,7 +704,7 @@ function mouseoverStates(d,i) {
                                                         return (cx + 60) + "px"
                                                    }
                                                  })
-                         .style("top", function() { return (cy + 10) + "px" });
+                         .style("top", function() { return (d3.event.pageY + 10) + "px" });
 
             stateTooltip.html("<p class='location'>" + d.state + "</p>" +
                               "<p class='info'>" + formatMoney(costLookup.get(d.state)) + "</p>")
