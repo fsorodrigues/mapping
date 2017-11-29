@@ -1,0 +1,186 @@
+.print-link{display:block;text-align:right;padding-bottom:.5em}div#block-print-ui-print-links span{display:block}.print_html,.print_mail,.print_pdf,.print_epub{margin-left:1em}.print-syslink{margin-right:1em}img.print-icon{vertical-align:middle}img.print-icon-margin{padding-right:4px}.node_embed_dialog{background:#e9e9e9;border:2px solid #333;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;padding:5px}.node_embed_dialog .ui-dialog-titlebar{margin:0;padding:5px;background-color:#333;color:#fff;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;position:relative}.node_embed_dialog .ui-dialog-titlebar-close{position:absolute;right:5px;color:#fff}#nodeEmbedDialog{margin:10px 0 0 0}.node_embed_dialog .nodeEmbedButtons{margin:0;padding:0}.node_embed_dialog .nodeEmbedButtons button{background:#333;color:#fff;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border:1px solid #444;padding:3px 10px;margin:5px 5px 0 0;cursor:pointer}.node_embed_dialog .nodeEmbedButtons button:hover{border:1px solid #999}.forward-link{position:relative;bottom:.5em;float:right;margin-left:1em}.forward-syslink{margin-right:1em}img.forward-icon{vertical-align:middle}img.forward-icon-margin{margin-right:4px}label.printmail-label{width:175px;float:left}
+
+#map-container {
+  width: 100%;
+  position: relative;
+}
+
+#svgBox #svg1 {
+  margin: 0;
+}
+
+#svgBox #svg2 {
+  background: rgba(255,255,255,.7);
+  position: absolute;
+  width: 200px;
+  height: 180px;
+  bottom: 0;
+  left: 0;
+}
+
+#svgBox .background {
+  fill: none;
+  pointer-events: all;
+}
+
+#svgBox .feature {
+  cursor: pointer;
+}
+
+#svgBox .feature.active {
+  fill: #C0C0C0;
+}
+
+#tooltip-container .tooltip {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  max-width: 240px;
+}
+
+#tooltip-container .state-tooltip {
+  position: absolute;
+  background-color: #EEEEEE;
+  border: 1pt solid #4A4A4A;
+  border-radius: 2%;
+  padding: .3rem;
+  font-family: "Open Sans", Verdana, sans-serif;
+  font-weight: 300;
+  font-size: .6rem;
+  opacity: .95;
+  max-width: 240px;
+
+}
+
+#tooltip-container .tooltip-content,
+#tooltip-container .state-data {
+  background-color: #EEEEEE;
+  border: 1pt solid #4A4A4A;
+  border-radius: 2%;
+  margin-right: 1%;
+  margin-top: .5%;
+  padding: .3rem;
+  font-family: "Open Sans", Verdana, sans-serif;
+  font-weight: 300;
+  font-size: .6rem;
+  opacity: .95
+}
+
+#svgBox .legend-label {
+  font-family: "Open Sans", Verdana, sans-serif;
+  font-weight: 300;
+  font-size: .8rem;
+}
+
+#svgBox .legend-title {
+  font-family: "Open Sans", Verdana, sans-serif;
+  font-weight: 700;
+  font-size: .8rem;
+}
+
+#svgBox .label {
+  font-family: "Open Sans", Verdana, sans-serif;
+}
+
+#tooltip-container p.location {
+  font-size: .8rem;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.2rem;
+}
+
+#tooltip-container p.info {
+  font-size: .8rem;
+  font-weight: normal;
+  margin: 0;
+  line-height: 1.2rem;
+}
+
+#tooltip-container span.state {
+  font-weight: normal;
+  margin: 0;
+  line-height: 1rem;
+}
+
+#svgBox .button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 0.5em;
+}
+
+#svgBox .buttons {
+  font-family: "Montserrat",sans-serif;
+  background-color: #B4D88E;
+  border: none;
+  color: #273914;
+  padding: 1% 1%;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1rem;
+  margin-right: 1%;
+  width: 135px;
+  box-shadow: inset 0 2px 0 0 #B8E986;
+}
+
+#svgBox .clicked {
+  font-family: "Montserrat", sans-serif;
+  background-color: #83BE44;
+  color: #273914;
+  padding: 1% 1%;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1rem;
+  margin-right: 1%;
+  width: 135px;
+  box-shadow: inset 0 2px 0 0 #B8E986;
+}
+
+#svgBox .clickInfo {
+  font-family: "Open Sans", Verdana, sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: .5rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+@media (min-width: 400px) {
+  #svgBox .clickInfo {
+    display: none;
+  }
+}
+
+#tooltip-container tbody tr:nth-child(even) {
+  background-color: #C8C8C8;
+}
+
+#tooltip-container table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: .5rem;
+}
+
+#tooltip-container thead {
+  text-align: Left;
+}
+
+#tooltip-container th:nth-child(3),
+#tooltip-container th:nth-child(4),
+#tooltip-container td:nth-child(3),
+#tooltip-container td:nth-child(4) {
+  text-align: right;
+}
+
+#tooltip-container th,
+#tooltip-container td {
+  padding-left: .5em;
+}
+
+#tooltip-container th {
+  border-bottom: 1pt solid #4A4A4A;
+}

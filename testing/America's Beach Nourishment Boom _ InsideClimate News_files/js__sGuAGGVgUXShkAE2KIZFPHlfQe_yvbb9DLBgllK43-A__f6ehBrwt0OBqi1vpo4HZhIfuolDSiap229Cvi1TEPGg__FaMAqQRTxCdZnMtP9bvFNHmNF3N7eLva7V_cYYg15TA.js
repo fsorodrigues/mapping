@@ -45,13 +45,17 @@ var buttons = selectButtons.selectAll(".buttons")
                            .attr("value", function(d) { return d.value; } )
                            .on("click", buttonClicked);
 
+var clickInfo = svgBox.append("p")
+                             .attr("class", "clickInfo")
+                             .text("(click states for zoom)");
+
 // appending svg to page
 var canvas = d3.select("#svgBox")
                .append("svg")
                .attr("id", "svg1")
                .attr("width", width)
                .attr("height", function(d) { if (width  > 400) { return height }
-                                             else { return 300 }
+                                             else { return 400 }
                                             })
                .on("click", stopped, true);
 
@@ -70,22 +74,15 @@ var svg = canvas.append("g")
 var svgFixed = d3.select("#svgBox")
                   .append("svg")
                   .attr("id", "svg2")
-                  .style("left", function(d) { if (width > 400) { return 50 + "px" }
-                                                   else { return 0 + "px" }
-                                                 })
-                  .style("top", function(d) { if (width > 400) { return - 170 + "px" }
-                                                   else { return 0 + "px" }
-                                                  })
                   .append("g");
 
-
 // appending divs for tooltip
-var tooltip = d3.select("#svgBox")
+var tooltip = d3.select("#tooltip-container")
                 .append("div")
                 .attr("class", "tooltip")
                 .style("opacity", 0);
 
-var stateTooltip = d3.select("#svgBox")
+var stateTooltip = d3.select("#tooltip-container")
                       .append("div")
                       .attr("class", "state-tooltip")
                       .style("opacity", 0);
@@ -97,14 +94,30 @@ var albersProjection = d3.geoAlbersUsa()            //tell it which projection t
 
 
 var zoom = d3.zoom()
-             .scaleExtent([1, 30])
-             .on("zoom", zoomed);
+             .scaleExtent([1, 30]);
 
 //set up the path generator function to draw the map outlines
 var path = d3.geoPath()
             .projection(albersProjection);        //tell it to use the projection that we just made to convert lat/long to pixels
 
-canvas.call(zoom);
+// canvas.call(zoom);
+
+function disableZoom() {
+  if (width < 400) {
+    zoom.on("zoom", zoomed);
+    // zoom.on("mousewheel.zoom", null);
+
+    canvas.call(zoom)
+          .on("wheel.zoom", null)
+          .on("touchmove.zoom", null);
+  } else {
+    zoom.on("zoom", zoomed);
+
+    canvas.call(zoom);
+  }
+}
+
+disableZoom();
 
 // creating array to force order in legend
 var priority_order = ["Federal", "State", "Local", "Private", "Unknown"]
@@ -199,7 +212,7 @@ queue()
 
     var minCost = d3.min(stateCost);
 
-    var sizingScale = d3.scalePow().domain([minCost, maxCost]).range([5, 20]);
+    var sizingScale = d3.scalePow().domain([minCost, maxCost]).range([width/200, width/50]);
 
     // appending map
     svg.append("g")
@@ -287,7 +300,7 @@ queue()
           .attr("id", function(d) { return d })
           .attr("cx", function(d) { return albersProjection(locationLookup.get(d))[0] })
           .attr("cy", function(d) { return albersProjection(locationLookup.get(d))[1] })
-          .attr('r', 8)
+          .attr('r', width/100)
           .attr("fill", function(d) {
               var selection = d3.select(this).attr("id");
 
@@ -340,7 +353,7 @@ queue()
                                   .attr("class", "legend-circle")
                                   .attr("cx", 0)
                                   .attr("cy", function(d,i) { return i * 20 })
-                                  .attr("r", 8)
+                                  .attr("r", width/100)
                                   .attr("fill", function(d) { return colorScale(d-1); })
                                   .attr("fill-opacity", 0)
                                   .attr("stroke", function(d) { return colorScale(d-1) })
@@ -417,8 +430,8 @@ function zoomed() {
   // By project circles
   d3.selectAll(".circle").transition()
                          .duration(50)
-                         .attr("r", function() { if (d3.event.transform.k < 5) { return 8 / d3.event.transform.k }
-                                                 else { return 8 / (d3.event.transform.k * 0.6) } })
+                         .attr("r", function() { if (d3.event.transform.k < 5) { return (width/100) / d3.event.transform.k }
+                                                 else { return (width/100) / (d3.event.transform.k * 0.6) } })
                          .attr("stroke-width", 1.5 / d3.event.transform.k);
 
  // By state circles
@@ -570,7 +583,7 @@ function showProjects() {
     d3.selectAll(".circle")
       .transition()
       .duration(500)
-        .attr("r", 7);
+        .attr("r", (width/100));
 
   d3.selectAll(".circles")
     .transition()
@@ -617,14 +630,18 @@ function mouseoverProjects(d,i) {
              .duration(300)
              .style("opacity", .9)
 
-      tooltip.style("left", function(d) { if (cx > 500) {
-                                            return (cx - 280) + "px";
+      tooltip.style("left", function(d) { if (cx > width/2) {
+                                            return (cx - 220) + "px";
                                         } else {
-                                            return (cx + 50) + "px"
+                                            return (cx + 80) + "px"
 
                                         }
                                       })
-             .style("top", function() { return (cy + 28) + "px" })
+             .style("top", function() { return (d3.event.pageY + 10) + "px" })
+
+             console.log(cx);
+             console.log(cy);
+             console.log(d3.event.pageY);
 
       var tooltipInfo = tooltip.append("div")
                                .attr("class", "tooltip-content");
@@ -681,13 +698,13 @@ function mouseoverStates(d,i) {
         var cy = +thisEl.attr("cy");
 
             stateTooltip.style("opacity", 1)
-                        .style("left", function(d) { if (cx > 500) {
-                                                        return (cx - 120) + "px"
+                        .style("left", function(d) { if (cx > width/2) {
+                                                        return (cx - 80) + "px"
                                                    } else {
-                                                        return (cx + 20) + "px"
+                                                        return (cx + 60) + "px"
                                                    }
                                                  })
-                         .style("top", function() { return (cy + 28) + "px" });
+                         .style("top", function() { return (cy + 10) + "px" });
 
             stateTooltip.html("<p class='location'>" + d.state + "</p>" +
                               "<p class='info'>" + formatMoney(costLookup.get(d.state)) + "</p>")
